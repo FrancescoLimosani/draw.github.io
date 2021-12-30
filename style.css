@@ -1,216 +1,133 @@
-body{
-    margin: 0;
-    overflow: hidden;
+@mixin google-font-importer($family, $subset: 'latin', $weight: 400) {
+  @import url(https://fonts.googleapis.com/css?family=#{$family}:#{$weight}&subset=#{$subset});
 }
 
-.noselect {
-    -webkit-touch-callout: none; /* iOS Safari */
-      -webkit-user-select: none; /* Safari */
-       -khtml-user-select: none; /* Konqueror HTML */
-         -moz-user-select: none; /* Old versions of Firefox */
-          -ms-user-select: none; /* Internet Explorer/Edge */
-              user-select: none; /* Non-prefixed version, currently
-                                    supported by Chrome, Opera and Firefox */
+@mixin google-font($family, $fallback, $weight: 400) {
+  font: {
+    family: #{$family}, #{$fallback};
+    weight: #{$weight};
+  }
 }
 
-.tool{    
-    padding: 0.7vw;
-    padding-top: 6vh;
-    vertical-align: top;
-    width: auto;
-    height: 50vh;
+$uc-font: "Audiowide";
+
+$uc-yellow: #ffd43b;
+$uc-black: #212529;
+$uc-red: #f03e3e;
+$uc-white: #f8f9fa;
+
+@include google-font-importer($uc-font, $subset: 'latin,latin-ext', $weight: '400,700');
+
+@mixin google-font($family, $fallback, $weight: 400) {
+  font: {
+    family: #{$family}, #{$fallback};
+    weight: #{$weight};
+  }
 }
 
-#pen{
-    padding-top: 0;
-}
-
-#hidePanels{
-    background-image: url(Icon_ionic-ios-arrow-dropright.svg);
-    background-repeat: no-repeat;
-    background-size: contain;
-    height: 3vh;
-    width: 3vh;
-    right: 0;
-    position: absolute;
-    top: 5vh;
-}
-
-@keyframes rotation1 {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(180deg);
-    }
-}
-@keyframes rotation2 {
-    from {
-      transform: rotate(180deg);
-    }
-    to {
-      transform: rotate(0deg);
+.center {
+    margin: {
+        right: auto;
+        left: auto;
     }
 }
 
-#container {
-    position: relative;
-    height: 100%;
+.center-translate {
+	position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.div-principal{
-    display: flex;
+.uc {
+	@include google-font($uc-font, sans-serif, 700);
+	display: block;
+	margin: {
+		top: 0.5em;
+		bottom: 0.5em;
+	}
+	border: 0.1em solid $uc-black;
+	padding: 0.7em;
+	width: auto;
+	text-align: center;
+	font-size: 30px;
+	border-radius: 0.3em;
+	text-shadow: 1px 1px 0px $uc-white;
+	color: $uc-black;
+	white-space: nowrap;
+	background: repeating-linear-gradient(
+    45deg,
+    $uc-yellow,
+    $uc-yellow 0.6em,
+    $uc-black 0.6em,
+    $uc-black 1.3em
+  );
+	
+	span,
+	i {
+		position: relative;
+		z-index: 5;
+	}
+	
+	&:before {
+		content: '';
+		position: absolute;
+		top: 0.6em;
+		bottom: 0.6em;
+		left: 0;
+		right: 0;
+		z-index: 0;
+		background-color: $uc-yellow;
+	}
+	
+	&.uc-biohazard {
+		color: $uc-red;
+		text-shadow: 1px 1px 0px $uc-black;
+		background: repeating-linear-gradient(
+			45deg,
+			$uc-black,
+			$uc-black 0.6em,
+			$uc-red 0.6em,
+			$uc-red 1.3em
+		);
+		
+		&:before {
+			background-color: $uc-black;
+		}
+	}
+	
+	&.uc-mines {
+		color: $uc-white;
+		text-shadow: 1px 1px 0px $uc-black;
+		background: repeating-linear-gradient(
+			45deg,
+			$uc-white,
+			$uc-white 0.6em,
+			$uc-black 0.6em,
+			$uc-black 1.3em
+		);
+		
+		&:before {
+			background-color: $uc-red;
+		}
+	}
 }
 
-.spanColor{
-    width:3.5vh; height:3.5vh; margin-left: 10; margin-top: 3px; margin-bottom: 3px; border: #888888 solid 2px; border-radius: 50%;
+.uc-sm {
+	font-size: 20px;
 }
 
-#can, #divColors, #divTools{
-    position: absolute;
+.uc-pos-fix {
+	position: relative;
+	width: 483px !important;
+	
+	&.uc-sm {
+		width: 322px !important;
+	}
 }
 
-#divTools{
-    background-image: url(rect_tools.PNG);
-    background-repeat: no-repeat;
-    background-size: contain;
-    height: 100%;
-    width: 60vw;
-    flex-direction: column;
-    top: 76vh;
-    left: 20vw;
-}
+//-----------
 
-#divColors{
-    background-image: url(rect_colors_2.PNG);
-    background-repeat: no-repeat;
-    background-size: contain;
-    height: 41vh;
-    width: 40vh;
-    flex-direction: column;
-    right: 0;
-    top: 8vh;
-}
-
-#divColors-internal{
-    display: table;
-    margin: 0 auto;
-}
-
-.divColors-internal-center{
-    display: flex;
-    flex-wrap: wrap;
-    clear: both;
-    width: auto;
-    margin: 0;
-    margin-left: 7.5vh;
-}
-
-.divColors-internal-extrems{
-    display: flex;
-    flex-wrap: wrap;
-    clear: both;
-    width: 100%;
-    margin: 0;
-    margin-left: 10vh;
-    margin-right: 10vh;
-}
-
-#div-Colors-internal-extremTop{
-    margin-top: 6vh;
-}
-
-#divDimensions-internal{
-    display: flex;
-    margin: 4vh auto;
-}
-
-#white{
-    background-color: #ffffff;
-}
-
-#green{
-    background-color: #00EE6F;
-}
-
-#blue{
-    background-color: #002BFF;
-}
-
-#red{
-    background-color: #FF1D34;
-}
-
-#yellow{
-    background-color: #EBEB00;
-}
-
-#orange{
-    background-color: #FFB300;
-}
-
-#porpora{
-    background-color: #D43092;
-}
-
-#lilla{
-    background-color: #7727D2;
-}
-
-#light-blue-sky{
-    background-color: #00CBFF;
-}
-
-#light-blue-dark{
-    background-color: #0067EE;
-}
-
-#pink{
-    background-color: #FF9BDE;
-}
-
-#violet{
-    background-color: #CF33E8;
-}
-
-#black{
-    background-color: #000000;
-    border: #155ebd solid 2px;
-}
-
-
-
-.span-lineDimension{
-    margin-left: 10; margin-top: 3px; margin-bottom: 3px; border: #888888 solid 2px; border-radius: 50%; background-color: #363636;
-}
-
-#y40{
-    width: 40; height: 40;
-}
-
-#y20{
-    margin-top: 11;
-    width: 22; height: 22;
-}
-
-#y14{
-    margin-top: 15;
-    width: 14; height: 14;
-}
-
-#y6{
-    margin-top: 18;
-    width: 8; height: 8;
-    border: #155ebd solid 2px;
-}
-
-#y4{
-    margin-top: 20;
-    width: 4; height: 4;
-}
-
-
-
-#can{
-    border: solid red;
+html.under-construction {
+	background: #aaaaaa url("https://www.transparenttextures.com/patterns/concrete-wall.png");
 }
